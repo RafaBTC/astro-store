@@ -2,24 +2,27 @@ import { addCartItem, isCartOpen } from '../lib/stores/cartStore'
 import { products } from '../mocks/products.json'
 import type { CartItem } from '../types/Cart'
 
+const PRODUCTS = products as CartItem[]
+
 export default function Products() {
   const addToCart = (product: CartItem) => {
     isCartOpen.set(true)
     addCartItem(product)
   }
 
-  return products.map(product => {
-    const { id, image, name, price, currency, description } = product
+  return PRODUCTS.map(product => {
+    const { id, image, name, price, currency, description, loading } = product
     return (
       <article key={id} className='rounded-2xl bg-slate-700 p-4'>
         <img
+          loading={loading}
           src={image}
           alt={`Cover del juego ${name}`}
           className='h-100 mx-auto w-full object-contain'
         />
         <div className='mt-4 flex flex-col'>
           <div className='min-h-96'>
-            <h4 className='text-2xl font-bold'>{name}</h4>
+            <p className='text-2xl font-bold'>{name}</p>
             <span className='text-xl font-medium text-indigo-300'>
               ${price} {currency}
             </span>

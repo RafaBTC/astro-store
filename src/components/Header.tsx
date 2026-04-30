@@ -12,11 +12,10 @@ export default function Header({ children }: Props) {
   const $isCartOpen = useStore(isCartOpen)
   const $isAuthStore = useStore(isAuthStore)
   const $userStore = useStore(userStore)
-  console.log($isAuthStore)
-  console.log($userStore?.name.charAt(0))
+
   return (
     <header className='fixed top-0 flex h-16 w-full items-center justify-between bg-indigo-900 px-4'>
-      <a href='/' className='text-center text-4xl font-bold'>
+      <a href='/' className='text-center text-2xl font-bold lg:text-4xl'>
         Retro Store
       </a>
       <div className='flex items-center gap-4'>
@@ -37,6 +36,8 @@ export default function Header({ children }: Props) {
         )}
         <button
           onClick={() => isCartOpen.set(!$isCartOpen)}
+          aria-label='cart'
+          name='cart'
           className='rounded-full bg-violet-600 p-3 text-xl transition hover:bg-violet-800'
         >
           {children}

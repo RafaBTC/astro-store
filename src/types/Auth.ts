@@ -3,7 +3,7 @@ export interface User {
   email: string
   name: string
   role: 'admin' | 'user'
-  avatar?: string
+  avatar: string
 }
 
 export interface AuthSession {

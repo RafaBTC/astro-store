@@ -6,6 +6,7 @@ export interface CartItem {
   image: string
   description: string
   quantity: number
+  loading: 'lazy' | 'eager' | undefined
 }
 
 export interface Cart {
