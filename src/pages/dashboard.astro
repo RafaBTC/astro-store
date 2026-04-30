@@ -1,0 +1,19 @@
+---
+export const prerender = false
+import LogoutButton from '../components/LogoutButton'
+import Layout from '../layouts/Layout.astro'
+
+const { user } = Astro.locals
+---
+
+<Layout>
+  <div class='flex items-center justify-center'>
+    <img src={user?.avatar} alt='User avatar' class='rounded-full h-32 w-32 object-cover' />
+  </div>
+  <h1 class='text-3xl text-center font-medium mb-8'>
+    ¡Bienvenido, {user?.name}!
+  </h1>
+  <div class='flex justify-center'>
+    <LogoutButton client:idle />
+  </div>
+</Layout>

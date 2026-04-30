@@ -1,0 +1,17 @@
+---
+export const prerender = false
+import Products from '../components/Products.tsx'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout>
+  <h1 class='py-4 text-center text-3xl font-bold'>¡Bienvenido a mi tienda en línea!</h1>
+
+  <div class='my-8 flex items-center justify-center gap-4'>
+    <a href='#productos' class='underline-offset-1 transition hover:underline'> Ver productos </a>
+  </div>
+
+  <section id='productos' class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    <Products client:load />
+  </section>
+</Layout>

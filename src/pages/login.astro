@@ -1,0 +1,21 @@
+---
+export const prerender = false
+import LoginForm from '../components/LoginForm'
+import Layout from '../layouts/Layout.astro'
+//import { isAuthStore } from '../lib/stores/authStores'
+
+// const $isLogin = Astro.cookies.get('auth-token')
+// console.log(isAuthStore.get())
+// const isauth = isAuthStore.get()
+// if (isauth) {
+//   console.log('uwu')
+// }
+---
+
+<Layout>
+  <h1 class='text-3xl font-bold text-center'>¡Inicia sesión!</h1>
+
+  <p class='text-center'>¡Accede con tu correo o cualquiera de los proovedores!</p>
+
+  <LoginForm client:load />
+</Layout>
