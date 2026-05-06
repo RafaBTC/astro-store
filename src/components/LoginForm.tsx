@@ -8,13 +8,17 @@ export default function LoginForm() {
   const { register, handleSubmit } = useForm<LoginCredentials>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
   const onSubmit: SubmitHandler<LoginCredentials> = async ({ email, password }) => {
     console.log(email)
     console.log(password)
     setLoading(true)
     try {
       await login(email, password)
-      window.location.href = '/dashboard'
+      const params = new URLSearchParams(window.location.search)
+      const redirect = params.get('redirect') || '/dashboard'
+      //si la pagina anterior era /cart, volver al cart
+      window.location.href = redirect
     } catch {
       setError('Email o contraseña incorrectos')
     } finally {
@@ -32,14 +36,14 @@ export default function LoginForm() {
           type='email'
           required
           placeholder='Correo'
-          className='min-w-md rounded-lg bg-white px-4 py-2 text-black'
+          className='w-full max-w-md rounded-lg bg-white px-4 py-2 text-black'
           {...register('email')}
         />
         <input
           type='password'
           required
           placeholder='Contraseña'
-          className='min-w-md rounded-lg bg-white px-4 py-2 text-black'
+          className='w-full max-w-md rounded-lg bg-white px-4 py-2 text-black'
           {...register('password')}
         />
         {error && <p className='text-red-700'>{error}</p>}

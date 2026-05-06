@@ -21,7 +21,7 @@ export default function Products() {
           className='h-100 mx-auto w-full object-contain'
         />
         <div className='mt-4 flex flex-col'>
-          <div className='min-h-96'>
+          <div className='md:min-h-87.5'>
             <p className='text-2xl font-bold'>{name}</p>
             <span className='text-xl font-medium text-indigo-300'>
               ${price} {currency}
@@ -32,7 +32,7 @@ export default function Products() {
           <div className='flex justify-center'>
             <button
               onClick={() => addToCart({ ...product, quantity: 1 })}
-              className='w-fit rounded-lg bg-violet-600 px-4 py-2 transition hover:bg-violet-800'
+              className='w-fit rounded-lg bg-violet-600 px-4 py-2 transition hover:bg-violet-700'
             >
               ¡Añadir al carrito!
             </button>

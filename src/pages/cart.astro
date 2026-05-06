@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ProductsSummary from '../components/E-Commerce/ProductsSummary'
+import OrderSummary from '../components/E-Commerce/OrderSummary'
+
+//Usar Astro.cookies
+const { user } = Astro.locals
+---
+
+<Layout>
+  <h1 class='text-3xl font-bold mb-5'>Resumen de su carrito</h1>
+  <div class='flex flex-col lg:flex-row gap-5 lg:gap-12'>
+    <ProductsSummary client:only='react' className='p-8' />
+    <OrderSummary client:only='react' user={user} />
+  </div>
+</Layout>

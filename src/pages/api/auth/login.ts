@@ -1,10 +1,11 @@
-export const prerender = false
 import type { APIRoute } from 'astro'
 
 import type { AuthResponse, LoginCredentials } from '../../../types/Auth'
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   const body: LoginCredentials = await request.json()
+  const { email } = body
+  const name = email.split('@')
   console.log('LLAMADA EN API POST DE /API/AUTH/LOGIN, EL BODY ES:', body)
   //aquí se llama al backend externo
   /*const res = await fetch('https://url-del-backend.com/api/auth/login', {
@@ -22,8 +23,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   const data: AuthResponse = {
     token: 'token fake',
     user: {
-      email: '123@gmail.com',
-      name: 'rafa',
+      email: email,
+      name: name[0],
       id: '1',
       role: 'admin',
       avatar: 'https://i.pinimg.com/736x/7e/54/70/7e54709b93abd9cdde22ae125b313ea8.jpg'

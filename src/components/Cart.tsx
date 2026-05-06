@@ -8,14 +8,14 @@ export default function Cart() {
   const $cartStore = useStore(cartStore)
 
   useEffect(() => {
-    if ($cartStore.items.length === 0) {
+    if ($cartStore.items.length === 0 || window.location.pathname !== '/') {
       isCartOpen.set(false)
     }
   }, [$cartStore.items.length])
 
   return (
     <div
-      className={`fixed rounded-2xl bg-slate-600 ${$isCartOpen ? 'block' : 'hidden'} w-100 z-999 right-8 top-20 flex h-80 max-h-80 flex-col justify-between overflow-y-auto p-4  transition-all duration-300`}
+      className={`fixed rounded-2xl bg-slate-600 ${$isCartOpen ? 'block' : 'hidden'} lg:w-100 z-999 right-8 top-20 flex h-80 max-h-80 w-72 flex-col justify-between overflow-y-auto p-4 transition-all duration-300`}
     >
       {$cartStore.items.length ? (
         <ul className='space-y-4'>
@@ -29,10 +29,10 @@ export default function Cart() {
                 />
 
                 <div>
-                  <h3 className='font-bold'>{name}</h3>
-                  <div className='flex justify-between'>
+                  <h3 className='text-sm font-bold lg:text-lg'>{name}</h3>
+                  <div className='flex flex-col justify-between text-xs lg:flex-row lg:text-base'>
                     <p>Quantity: {quantity}</p>
-                    <span className='text-sm font-medium'>
+                    <span className='text-xs font-medium lg:text-sm'>
                       ${price} {currency}
                     </span>
                   </div>
@@ -57,7 +57,7 @@ export default function Cart() {
 
       <div className='mt-4 flex justify-center '>
         <a
-          href='/finalizar-compra'
+          href='/cart'
           className='rounded-lg bg-violet-600 px-4 py-2 transition hover:bg-violet-800'
         >
           Finalizar compra

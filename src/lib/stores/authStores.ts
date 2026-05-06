@@ -1,4 +1,4 @@
-import { atom, computed } from 'nanostores'
+import { atom } from 'nanostores'
 
 import type { User } from '../../types/Auth'
 
@@ -16,10 +16,10 @@ function getUserFromCookie(): User | null {
   }
 }
 
+//paara las cookies, es mejor usar Astro.cookies y pasar como parametro a componentes de react
 export const userStore = atom<User | null>(getUserFromCookie())
-
-export const isAuthStore = computed(userStore, user => user !== null)
-export const isAdminStore = computed(userStore, user => user?.role === 'admin')
+//export const isAuthStore = computed(userStore, user => user !== null)
+//export const isAdminStore = computed(userStore, user => user?.role === 'admin')
 
 export async function login(email: string, password: string) {
   const res = await fetch('/api/auth/login', {

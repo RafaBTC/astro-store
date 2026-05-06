@@ -92,7 +92,7 @@ export default [
     rules: {
       '@typescript-eslint/naming-convention': [
         'error',
-        { selector: 'default', format: ['camelCase', 'PascalCase'] },
+        { selector: 'default', format: ['camelCase', 'PascalCase', 'snake_case'] },
         {
           selector: ['class', 'interface', 'typeParameter', 'typeAlias'],
           format: ['PascalCase']

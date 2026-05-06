@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { logout } from '../lib/stores/authStores'
 
@@ -8,6 +9,7 @@ export default function LogoutButton() {
     try {
       setLoading(true)
       await logout()
+      toast.success('Sesión cerrada correctamente')
     } catch {
     } finally {
       setLoading(false)

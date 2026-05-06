@@ -1,21 +1,41 @@
 ---
-export const prerender = false
+import { Icon } from 'astro-icon/components'
 import LoginForm from '../components/LoginForm'
 import Layout from '../layouts/Layout.astro'
-//import { isAuthStore } from '../lib/stores/authStores'
 
-// const $isLogin = Astro.cookies.get('auth-token')
-// console.log(isAuthStore.get())
-// const isauth = isAuthStore.get()
-// if (isauth) {
-//   console.log('uwu')
-// }
+//Usar Astro.cookies
+const token = Astro.cookies.get('auth-token')?.value
+
+if (token) {
+  return Astro.redirect('/dashboard')
+}
 ---
 
 <Layout>
   <h1 class='text-3xl font-bold text-center'>¡Inicia sesión!</h1>
 
-  <p class='text-center'>¡Accede con tu correo o cualquiera de los proovedores!</p>
+  <p class='text-center my-4'>¡Accede con tu correo o cualquiera de los proovedores!</p>
+  <div class='flex flex- items-center justify-center gap-2'>
+    <a
+      href='/api/auth/google'
+      class='rounded-lg border-2 border-violet-600 text-lg p-3 transition hover:bg-violet-600'
+    >
+      <Icon name='ri:google-fill' />
+    </a>
 
+    <a
+      href='/api/auth/linkedin'
+      class='rounded-lg border-2 border-violet-600 text-lg p-3 transition hover:bg-violet-600'
+    >
+      <Icon name='ri:linkedin-fill' />
+    </a>
+
+    <a
+      href='/api/auth/microsoft'
+      class='rounded-lg border-2 border-violet-600 text-lg p-3 transition hover:bg-violet-600'
+    >
+      <Icon name='ri:microsoft-fill' />
+    </a>
+  </div>
   <LoginForm client:load />
 </Layout>
