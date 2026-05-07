@@ -20,7 +20,7 @@ export default function ProductInfo({ product, readOnly = false, className }: Pr
       <img
         src={image}
         alt={`Portada del juego ${name}`}
-        className='mx-auto h-auto w-24 object-contain lg:mx-0'
+        className='mx-auto h-44 w-24 object-contain lg:mx-0'
       />
 
       <div className='space-y-2 text-center lg:text-left'>
