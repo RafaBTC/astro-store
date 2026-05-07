@@ -2,6 +2,8 @@ import { atom } from 'nanostores'
 
 import type { User } from '../../types/Auth'
 
+import { clearPurchases, purchasesStore } from './purchasesStore'
+
 function getUserFromCookie(): User | null {
   if (typeof document === 'undefined') return null
 
@@ -37,5 +39,6 @@ export async function login(email: string, password: string) {
 export async function logout() {
   await fetch('/api/auth/logout', { method: 'POST' })
   userStore.set(null)
+  clearPurchases()
   window.location.href = '/'
 }

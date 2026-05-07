@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 import LogoutButton from '../components/LogoutButton'
 import Layout from '../layouts/Layout.astro'
 import Purchases from '../components/Purchases'
+
 const { user } = Astro.locals
 ---
 
@@ -11,16 +12,18 @@ const { user } = Astro.locals
     <div class='flex items-center justify-center'>
       <Image loading='eager' src={user.avatar} alt='User avatar' class='rounded-full object-cover' width={128} height={128}/>
     </div>
-    <h1 class='text-3xl text-center font-medium mb-2'>
+    <h1 class='text-4xl text-center font-medium mb-2'>
       ¡Bienvenido, {user.name}!
     </h1>
 
-    <p class="text-center mb-8">
+    <p class="text-center mb-4">
       Tu correo es: {user.email}
     </p>
+
+    <div class='flex justify-center mb-8'>
+      <LogoutButton client:idle />
+    </div>
   )}
-  <Purchases client:load />
-  <div class='flex justify-center'>
-    <LogoutButton client:idle />
-  </div>
+  <Purchases client:only='react' />
+  
 </Layout>

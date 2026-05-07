@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { addCartItem, isCartOpen } from '../lib/stores/cartStore'
 import { products } from '../mocks/products.json'
 import type { CartItem } from '../types/Cart'
@@ -18,7 +20,7 @@ export default function Products() {
           loading={loading}
           src={image}
           alt={`Cover del juego ${name}`}
-          className='h-100 mx-auto w-full object-contain'
+          className='mx-auto h-48 w-full object-contain sm:h-72 md:h-96'
         />
         <div className='mt-4 flex flex-col'>
           <div className='md:min-h-87.5'>
@@ -31,7 +33,10 @@ export default function Products() {
 
           <div className='flex justify-center'>
             <button
-              onClick={() => addToCart({ ...product, quantity: 1 })}
+              onClick={() => {
+                addToCart({ ...product, quantity: 1 })
+                toast.success('Producto añadido al carrito')
+              }}
               className='w-fit rounded-lg bg-violet-600 px-4 py-2 transition hover:bg-violet-700'
             >
               ¡Añadir al carrito!
