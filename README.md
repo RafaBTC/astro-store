@@ -364,9 +364,119 @@ src/
 Cada capa tiene una responsabilidad única y nunca salta niveles. Si mañana cambias tu backend externo, solo tocas `src/services/`. Si cambias la UI, solo tocas `src/components/`. Si agregas lógica de toast o loading, solo tocas `src/hooks/`.
 
 
+
+# TESTING
+Existen 3 tipos de test (pensar en ellos como piramide):
+
+1. _**E2E (end to end) Test**_ (pocos, lentos, simulan al usuario real)
+2. _**Component Test**_ (medios, prueban componentes de react u otra librería)
+3. _**Unit test**_ (muchos, rápidos, prueban funciones puras (lib, services, etc))
+      
+     / \
+    /   \
+   /  1  \
+  /   2   \
+ /    3    \
+/___________\
+
+
+| Tipo      | Qué prueba                           | Herramientas | Velocidad   |
+| --------- |:------------------------------------:|:------------:|:-----------:|
+| Unit      | Funciones puras (lib, services, etc) | Vitest       | Instantáneo |
+| Component | Componentes React en aislamiento     | Vitest + RTL | Rápido      |
+| E2E       | Flujo completo en el navegador real  | Playwright   | Lento       |
+
+## Setup para el proyecto
+1. **Instalar dependencias**
+```ts
+# Unit + components tests
+npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event happy-dom
+
+# E2E tests
+npm install -D @playwright/test
+npx playwright install chromium
+```
+
+2. **Configurar Vitest**
+```ts
+// vitest.config.ts
+/// <reference types="vitest/config" />
+import { getViteConfig } from 'astro/config'
+
+export default getViteConfig({
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: './src/test/setup.ts',
+    include: ['src/**/*.test.{ts,tsx,astro}'],
+    exclude: ['e2e/**', 'node_modules/**']
+  }
+})
+
+
+// src/test/setup.ts
+import '@testing-library/jest-dom'  // agrega matchers como toBeInTheDocument
+```
+
+3. **Configurar Playwright**
+Se recomienda ejecutar
+```ts
+npm init playwright@latest
+```
+
+Y configurar el archivo
+```ts
+// playwright.config.ts
+import { defineConfig } from '@playwright/test'
+
+export default defineConfig({
+  testDir: './e2e',
+  baseURL: 'http://localhost:4321',
+  use: {
+    headless: true,
+  },
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:4321',
+    reuseExistingServer: !process.env.CI,
+  },
+})
+```
+Lo estandar es tener en la raíz del proyecto la carpeta /e2e y el archivo playwright.config.ts
+
+4. **Crear los scripts de test en el package.json**
+```ts
+{
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  }
+}
+```
+
+5. **Proceder a crear los tests para funciones, components y e2e, mantenerlo de la siguiente manera (estructura de archivos y carpetas)**
+
+* Lo ideal es tener los tests por el nombre del archivo al que se le hace test, por ejemplo:
+```
+components/
+  ProductCard/
+    ProductCard.tsx
+    ProductCard.test.tsx
+```
+
+```
+e2e/
+  checkout.spec.ts
+  login.spec.ts
+```
 PREGUNTAR EL MANEJO CORRECTO DE ERRORES Y CÓMO APLICAR DRY EN LOS NANOSTORES AL LLAMAR A LAS API
 
 Y si tengo tiempo, en el futuro...
 - Implementar bases de datos
 - Hacer las APIs Routes un backend seguro
 - conectar bases de datos con API Routes
+
+

@@ -2,7 +2,7 @@ import { atom } from 'nanostores'
 
 import type { User } from '../../types/Auth'
 
-import { clearPurchases, purchasesStore } from './purchasesStore'
+import { clearPurchases } from './purchasesStore'
 
 function getUserFromCookie(): User | null {
   if (typeof document === 'undefined') return null
@@ -19,6 +19,7 @@ function getUserFromCookie(): User | null {
 }
 
 //paara las cookies, es mejor usar Astro.cookies y pasar como parametro a componentes de react
+// de hecho ni se usa el user store xd
 export const userStore = atom<User | null>(getUserFromCookie())
 //export const isAuthStore = computed(userStore, user => user !== null)
 //export const isAdminStore = computed(userStore, user => user?.role === 'admin')
@@ -40,5 +41,5 @@ export async function logout() {
   await fetch('/api/auth/logout', { method: 'POST' })
   userStore.set(null)
   clearPurchases()
-  window.location.href = '/'
+  window.location.replace('/')
 }

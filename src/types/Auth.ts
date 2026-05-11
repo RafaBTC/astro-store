@@ -22,37 +22,39 @@ export interface AuthResponse {
   user: User
 }
 
-//aquí deberían de ir los tipos de cada una de los oauth al momento de obtener la info del token
-export interface OAuthSession {
+//junté las props del payload de oauth, puse como opcional los que no coinciden entre todos xd
+export interface OAuthSessionPayload {
   iss: string
-  azp: string
+  azp?: string
   aud: string
   sub: string
   email: string
-  email_verified: boolean
-  at_hash: string
+  email_verified?: boolean
+  at_hash?: string
   name: string
-  picture: string
-  given_name: string
-  family_name: string
+  picture?: string
+  given_name?: string
+  family_name?: string
   iat: number
   exp: number
+  nbf?: number
+  oid?: string
+  preferred_username?: string
+  rh?: string
+  sid?: string
+  tid?: string
+  uti?: string
+  auth_time?: number
 }
 
-export interface OAuthMicrosoftPayload {
-  aud: string
-  iss: string
-  iat: number
-  nbf: number
-  exp: number
+export interface OAuthDiscordUserPayload {
+  id: string
+  username: string
+  avatar: string | null
+  banner: string | null
+  discriminator: string | null
+  global_name: string
+  banner_color: string
   email: string
-  name: string
-  oid: string
-  preferred_username: string
-  rh: string
-  sid: string
-  sub: string
-  tid: string
-  uti: string
-  ver: string
+  verified: boolean
 }

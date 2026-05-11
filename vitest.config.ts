@@ -1,0 +1,12 @@
+/// <reference types="vitest/config" />
+import { getViteConfig } from 'astro/config'
+
+export default getViteConfig({
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: './src/test/setup.ts',
+    include: ['src/**/*.test.{ts,tsx,astro}'],
+    exclude: ['e2e/**', 'node_modules/**']
+  }
+})

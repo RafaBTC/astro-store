@@ -21,7 +21,7 @@ interface Props {
   onSuccess?: (orderId: string) => void
 }
 
-export default function PaypalPayment({ currency = 'MXN', onSuccess }: Props) {
+export default function paypaPaypalPayment({ currency = 'MXN', onSuccess }: Props) {
   const $cartStore = cartStore.get()
 
   const handleCreateOrder = async () => {
@@ -48,7 +48,7 @@ export default function PaypalPayment({ currency = 'MXN', onSuccess }: Props) {
         throwConfetti()
         addPurchaseFromPaypal($cartStore)
         clearCart()
-        window.location.href = '/dashboard'
+        window.location.replace('/dashboard')
       }
     } catch {
       toast.error('El pago no pudo completarse, hubo un problema')

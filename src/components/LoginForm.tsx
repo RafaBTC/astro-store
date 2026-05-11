@@ -18,7 +18,7 @@ export default function LoginForm() {
       const params = new URLSearchParams(window.location.search)
       const redirect = params.get('redirect') || '/dashboard'
       //si la pagina anterior era /cart, volver al cart
-      window.location.href = redirect
+      window.location.replace(redirect)
     } catch {
       setError('Email o contraseña incorrectos')
     } finally {
