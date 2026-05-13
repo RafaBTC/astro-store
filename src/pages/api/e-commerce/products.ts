@@ -1,0 +1,77 @@
+import type { APIRoute } from 'astro'
+
+import type { CartItem } from '../../../types/Cart'
+
+export const prerender = true
+export const GET: APIRoute = async () => {
+  const PRODUCTS: CartItem[] = [
+    {
+      id: '1',
+      name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
+      price: 750,
+      currency: 'MXN',
+      image: 'images/Ratchet.webp',
+      description:
+        'Únete al equipo doble supremo con un elenco de aliados familiares y nuevas caras, como una luchadora de la resistencia Lombax nueva que tiene la misma determinación de eliminar al azote robótico. Juega como Ratchet y como la nueva Lombax misteriosa de otra dimensión.',
+      loading: 'eager',
+      quantity: 1
+    },
+    {
+      id: '2',
+      name: 'Final Fantasy IX - Nintendo Switch',
+      price: 1150,
+      currency: 'MXN',
+      image: 'images/FF9.webp',
+      description:
+        'El ladrón Yitán Tribal y la compañía de teatro Tantalus intentan secuestrar a la princesa Garnet, quien busca escapar, uniendo fuerzas para detener a la reina Brahne y al villano Kuja de desatar una guerra con magos negros.',
+      loading: 'eager',
+      quantity: 1
+    },
+    {
+      id: '3',
+      name: 'Super Mario Odyssey - Standard Edition - Nintendo Switch',
+      price: 903,
+      currency: 'MXN',
+      image: 'images/MarioOddysey.webp',
+      description:
+        'Acompaña a Mario en una aventura en 3D enorme por todo el planeta usando sus nuevas habilidades para recoger lunas que servirán de combustible a tu aeronave, la Odyssey. ¡Y entretanto, rescata a la princesa Peach de las garras de Bowser. Esta aventura 3D de Mario de estilo sandbox —la primera desde Super Mario 64 en 1997 y Super Mario Sunshine para Game Cube en 2002— está llena a reventar de secretos y sorpresas.',
+      loading: 'eager',
+      quantity: 1
+    },
+    {
+      id: '4',
+      name: 'Super Mario Galaxy™ + Super Mario Galaxy™ 2 - MEX',
+      price: 1055,
+      currency: 'MXN',
+      image: 'images/MarioGalaxy.webp',
+      description:
+        '¡Desplázate a través del cosmos con Mario en estos dos juegos clásicos, diviértete con el contenido adicional y disfruta la resolución de imágenes y el interfaz de usuario mejorados en la consola Nintendo Switch!',
+      loading: 'lazy',
+      quantity: 1
+    },
+    {
+      id: '5',
+      name: 'Resident Evil 2 - PlayStation 5',
+      price: 463,
+      currency: 'MXN',
+      image: 'images/RE2.webp',
+      description:
+        'ZOMBIS ATERRADORES ESPERANDO EN CADA ESQUINA: Impulsadas por un hambre insaciable, estas criaturas actúan por instinto, rechinando los dientes, desgarrando la carne y devorando a sus víctimas. La nueva cámara inmersiva te permite sentir sus colmillos a medida que se hunden en tu carne.',
+      loading: 'lazy',
+      quantity: 1
+    },
+    {
+      id: '6',
+      name: 'Persona 3 Reload: Launch Edition - PlayStation 5',
+      price: 381,
+      currency: 'MXN',
+      image: 'images/PERSONA.webp',
+      description:
+        'Disfruta de un título determinante en la saga Persona, rehecho con los gráficos más avanzados, funciones modernizadas y una interfaz de usuario con estilo propio. Sumérgete en un viaje apasionante y emotivo con escenas inéditas, nuevas interacciones entre los personajes, una locución adicional y una banda sonora renovada.',
+      loading: 'lazy',
+      quantity: 1
+    }
+  ]
+
+  return new Response(JSON.stringify(PRODUCTS), { status: 200 })
+}

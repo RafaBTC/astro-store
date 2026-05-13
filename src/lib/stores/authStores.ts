@@ -10,7 +10,7 @@ function getUserFromCookie(): User | null {
   const match = document.cookie.match(/auth-user=([^;]+)/)
 
   if (!match) return null
-
+  console.log('MATCHEO Y PARSEÓ', JSON.parse(decodeURIComponent(match[1])))
   try {
     return JSON.parse(decodeURIComponent(match[1]))
   } catch {

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 
 import { addCartItem, cartStore, clearCart, removeCartItem, removeOneItem } from './cartStore'
 
@@ -8,7 +8,6 @@ describe('cartStore', () => {
   beforeEach(() => {
     clearCart() //limpia el carrito
   })
-
   //"sé" inicia vacío
   it('initiates empty', () => {
     expect(cartStore.get().items).toHaveLength(0)
@@ -22,7 +21,7 @@ describe('cartStore', () => {
       name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
       price: 750,
       currency: 'MXN',
-      image: 'images/Ratchet.jpg',
+      image: 'images/Ratchet.webp',
       description: 'Únete al equipo doble ...',
       loading: 'eager'
     })
@@ -38,7 +37,7 @@ describe('cartStore', () => {
       name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
       price: 750,
       currency: 'MXN',
-      image: 'images/Ratchet.jpg',
+      image: 'images/Ratchet.webp',
       description: 'Únete al equipo doble ...',
       loading: 'eager'
     })
@@ -56,7 +55,7 @@ describe('cartStore', () => {
       name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
       price: 750,
       currency: 'MXN',
-      image: 'images/Ratchet.jpg',
+      image: 'images/Ratchet.webp',
       description: 'Únete al equipo doble ...',
       loading: 'eager'
     })
@@ -66,7 +65,7 @@ describe('cartStore', () => {
       name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
       price: 750,
       currency: 'MXN',
-      image: 'images/Ratchet.jpg',
+      image: 'images/Ratchet.webp',
       description: 'Únete al equipo doble ...',
       loading: 'eager'
     })
@@ -75,5 +74,30 @@ describe('cartStore', () => {
 
     expect(cartStore.get().items).toHaveLength(1)
     expect(cartStore.get().total).toBe(750)
+  })
+
+  //"sé" calcula correctamente el total del carrito
+  it('should calculate properly the total amount', () => {
+    addCartItem({
+      id: '1',
+      name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
+      price: 750,
+      currency: 'MXN',
+      image: 'images/Ratchet.webp',
+      description: 'Únete al equipo doble ...',
+      loading: 'eager'
+    })
+
+    addCartItem({
+      id: '1',
+      name: 'Ratchet & Clank: Rift Apart - PlayStation 5',
+      price: 750,
+      currency: 'MXN',
+      image: 'images/Ratchet.webp',
+      description: 'Únete al equipo doble ...',
+      loading: 'eager'
+    })
+
+    expect(cartStore.get().total).toBe(1500)
   })
 })

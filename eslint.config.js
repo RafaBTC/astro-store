@@ -6,7 +6,7 @@ import importPlugin from 'eslint-plugin-import'
 import prettierPlugin from 'eslint-plugin-prettier'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
-import globals from 'globals'
+//import globals from 'globals'
 import tsEslint from 'typescript-eslint'
 
 // ─── Reglas compartidas de lógica (NO formato — eso lo maneja Prettier) ───────
@@ -33,7 +33,17 @@ const importRules = {
 
 export default [
   // ─── Ignorados ──────────────────────────────────────────────────────────────
-  { ignores: ['node_modules/', 'dist/', '.astro/'] },
+  {
+    ignores: [
+      'node_modules/',
+      'dist/',
+      '.astro/',
+      '.github/',
+      '.vercel/',
+      '.vscode/',
+      'test-production/'
+    ]
+  },
 
   // ─── Base TypeScript (primero, para que nuestras reglas puedan hacer override) ──
   ...tsEslint.configs.recommended,
@@ -42,7 +52,7 @@ export default [
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
-      globals: globals.browser,
+      //globals: globals.browser,
       parser: tsParser,
       parserOptions: {
         jsx: true,

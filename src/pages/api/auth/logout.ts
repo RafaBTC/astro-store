@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 
-export const POST: APIRoute = async ({ cookies, redirect }) => {
+export const POST: APIRoute = async ({ cookies }) => {
   cookies.delete('auth-token', { path: '/' })
   cookies.delete('auth-user', { path: '/' })
 
@@ -13,6 +13,5 @@ export const POST: APIRoute = async ({ cookies, redirect }) => {
   cookies.delete('microsoft_state', { path: '/' })
   cookies.delete('microsoft_verifier', { path: '/' })
 
-  redirect('/login')
   return new Response(JSON.stringify({ ok: true }), { status: 200 })
 }

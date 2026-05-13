@@ -1,12 +1,14 @@
 ---
 import Products from '../components/Products.tsx'
 import Layout from '../layouts/Layout.astro'
+
+export const prerender = true
 ---
 
 <Layout>
   <h1 class='py-4 text-center text-3xl font-bold'>¡Bienvenido a mi tienda en línea!</h1>
 
-  <section id='productos' class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8'>
+  <section id='productos' class='mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
     <Products client:load />
   </section>
 </Layout>

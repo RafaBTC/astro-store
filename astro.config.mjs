@@ -8,6 +8,8 @@ import icon from 'astro-icon'
 
 import vercel from '@astrojs/vercel'
 
+//import node from '@astrojs/node'
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',

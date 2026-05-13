@@ -8,8 +8,8 @@ const { user } = Astro.locals
 ---
 
 <Layout>
-  <h1 class='text-3xl font-bold mb-5'>Resumen de su carrito</h1>
-  <div class='flex flex-col lg:flex-row gap-5 lg:gap-12'>
+  <h1 class='mb-5 text-3xl font-bold'>Resumen de su carrito</h1>
+  <div class='flex flex-col gap-5 lg:flex-row lg:gap-12'>
     <ProductsSummary client:only='react' className='p-8'>
       <div slot='fallback'>CARGANDO RESUMEN DE PRODUCTOS</div>
     </ProductsSummary>

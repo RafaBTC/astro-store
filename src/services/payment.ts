@@ -23,7 +23,6 @@ export async function createPaypalOrder({
     return { orderId }
   } catch (e) {
     console.error(e)
-    toast.error(`Error al crear orden desde PayPal ${e}`)
     throw new Error('Error creating order')
   }
 }

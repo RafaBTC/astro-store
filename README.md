@@ -472,6 +472,9 @@ e2e/
   checkout.spec.ts
   login.spec.ts
 ```
+
+
+
 PREGUNTAR EL MANEJO CORRECTO DE ERRORES Y CÓMO APLICAR DRY EN LOS NANOSTORES AL LLAMAR A LAS API
 
 Y si tengo tiempo, en el futuro...
