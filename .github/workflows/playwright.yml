@@ -16,18 +16,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    # Instala pnpm
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+
     # Instala node.js
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
         cache: 'pnpm'
-
-    # Instala pnpm
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
 
     # Instala dependencias
     - name: Install dependencies
