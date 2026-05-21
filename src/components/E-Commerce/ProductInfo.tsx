@@ -54,7 +54,7 @@ export default function ProductInfo({ product, readOnly = false, className }: Pr
       </div>
 
       {!readOnly && (
-        <div className='absolute right-4 top-4'>
+        <div className='absolute top-4 right-4'>
           <button
             onClick={() => removeCartItem(id)}
             className='h-8 w-8 rounded-full pb-1 text-center transition hover:bg-indigo-900'
@@ -64,7 +64,7 @@ export default function ProductInfo({ product, readOnly = false, className }: Pr
         </div>
       )}
 
-      <div className='bottom-6 right-8 text-end lg:absolute'>
+      <div className='right-8 bottom-6 text-end lg:absolute'>
         <span className='text-violet-280 text-lg font-medium text-violet-500'>
           ${price * quantity} {currency}
         </span>

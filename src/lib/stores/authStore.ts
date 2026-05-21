@@ -24,7 +24,7 @@ export const userStore = atom<User | null>(getUserFromCookie())
 //export const isAuthStore = computed(userStore, user => user !== null)
 //export const isAdminStore = computed(userStore, user => user?.role === 'admin')
 
-export async function login(email: string, password: string) {
+export async function login(email: string, password: string): Promise<void> {
   const res = await fetch('/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

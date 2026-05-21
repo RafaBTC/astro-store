@@ -1,3 +1,4 @@
+import { useStore } from '@nanostores/react'
 import {
   PayPalGuestPaymentButton,
   PayPalOneTimePaymentButton,
@@ -5,7 +6,6 @@ import {
   type OnApproveDataOneTimePayments,
   type OnErrorData
 } from '@paypal/react-paypal-js/sdk-v6'
-import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import PaypalLayout from '../../layouts/PaypalLayout'
@@ -21,8 +21,8 @@ interface Props {
   onSuccess?: (orderId: string) => void
 }
 
-export default function paypaPaypalPayment({ currency = 'MXN', onSuccess }: Props) {
-  const $cartStore = cartStore.get()
+export default function PaypalPayment({ currency = 'MXN', onSuccess }: Props) {
+  const $cartStore = useStore(cartStore)
 
   const handleCreateOrder = async () => {
     try {
@@ -70,6 +70,7 @@ export default function paypaPaypalPayment({ currency = 'MXN', onSuccess }: Prop
           <div className='mt-8 flex flex-col items-center justify-center gap-4'>
             <PaypalLayout>
               <PayPalOneTimePaymentButton
+                data-testid='paypal-button'
                 presentationMode='auto'
                 createOrder={handleCreateOrder}
                 onApprove={handleApprove}

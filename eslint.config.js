@@ -41,7 +41,8 @@ export default [
       '.github/',
       '.vercel/',
       '.vscode/',
-      'test-production/'
+      'test-production/',
+      'coverage/'
     ]
   },
 

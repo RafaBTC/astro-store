@@ -1,7 +1,7 @@
 import type { User } from '../types/Auth'
 
 interface Props {
-  user: User | undefined
+  user?: User
 }
 
 export default function UserButton({ user }: Props) {

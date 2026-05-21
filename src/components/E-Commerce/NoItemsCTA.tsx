@@ -19,7 +19,7 @@ export default function NoItemsCTA({ className, message, cta }: NoItemsCTAProps)
       </p>
 
       <a
-        href='/#productos'
+        href='/'
         className='w-full rounded-lg border-2 border-violet-600 px-4 py-2 text-center text-lg transition hover:bg-violet-600 md:w-[50%]'
       >
         {cta ?? 'Continuar comprando'}

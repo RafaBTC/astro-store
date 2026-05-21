@@ -17,7 +17,7 @@ export default function OrderSummary({ user, location, readOnly = false }: Order
   const currency = $cart?.items[0]?.currency
 
   return $cart.items.length > 0 ? (
-    <div className='lg:min-w-100 h-fit rounded-3xl bg-violet-900 p-8'>
+    <div className='h-fit rounded-3xl bg-violet-900 p-8 lg:min-w-100'>
       <h5 className='mb-4 text-xl font-bold'>Resumen de la orden</h5>
       <div className='border-t-2 border-violet-500'>
         {location === '/checkout' && <ProductsSummary readOnly={readOnly} />}
@@ -32,7 +32,7 @@ export default function OrderSummary({ user, location, readOnly = false }: Order
             </span>
           </li>
 
-          <li className='flex justify-between font-medium'>
+          <li data-testid='products-counter' className='flex justify-between font-medium'>
             <p>Productos:</p>
             <span>{totalProducts}</span>
           </li>

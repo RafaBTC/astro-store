@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   //aquí se guuarda el token en cookie httpOnly
   cookies.set('auth-token', data.token, {
     httpOnly: true,
-    secure: false,
+    secure: import.meta.env.PROD,
     sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 7 // 7 días
@@ -42,11 +42,11 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
   cookies.set('auth-user', JSON.stringify(data.user), {
     httpOnly: false,
-    secure: false,
+    secure: import.meta.env.PROD,
     sameSite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 7 // 7 días
   })
-  console.log('COOKIE EN ENDPOINT DINAMICO LOGIN', cookies)
+
   return new Response(JSON.stringify({ ok: true }), { status: 200 })
 }

@@ -17,6 +17,7 @@ if (token) {
   <p class='my-4 text-center'>¡Accede con tu correo o cualquiera de los proovedores!</p>
   <div class='flex- flex items-center justify-center gap-2'>
     <a
+      data-testid='google-login-button'
       href='/api/auth/google'
       class='rounded-lg border-2 border-violet-600 p-3 text-lg transition hover:bg-violet-600'
     >
@@ -24,6 +25,7 @@ if (token) {
     </a>
 
     <a
+      data-testid='linkedin-login-button'
       href='/api/auth/linkedin'
       class='rounded-lg border-2 border-violet-600 p-3 text-lg transition hover:bg-violet-600'
     >
@@ -31,6 +33,7 @@ if (token) {
     </a>
 
     <a
+      data-testid='microsoft-login-button'
       href='/api/auth/microsoft'
       class='rounded-lg border-2 border-violet-600 p-3 text-lg transition hover:bg-violet-600'
     >
@@ -38,11 +41,12 @@ if (token) {
     </a>
 
     <a
+      data-testid='discord-login-button'
       href='/api/auth/discord'
       class='rounded-lg border-2 border-violet-600 p-3 text-lg transition hover:bg-violet-600'
     >
       <Icon name='ri:discord-fill' />
     </a>
   </div>
-  <LoginForm client:load />
+  <LoginForm client:only='react' />
 </Layout>

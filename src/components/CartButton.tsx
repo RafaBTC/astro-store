@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import { cartStore, isCartOpen } from '../lib/stores/cartStore'
 
 interface Props {
-  children: ReactNode
+  children?: ReactNode
 }
 
 export default function CartButton({ children }: Props) {
@@ -13,6 +13,7 @@ export default function CartButton({ children }: Props) {
   return (
     <div className='relative'>
       <button
+        data-testid='cart-button'
         onClick={() => isCartOpen.set(!$isCartOpen)}
         aria-label='cart'
         name='cart'
@@ -21,7 +22,10 @@ export default function CartButton({ children }: Props) {
         {children}
       </button>
       {$cart.items.length > 0 && (
-        <div className='absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 pb-px text-center text-xs'>
+        <div
+          data-testid='cart-count'
+          className='absolute -top-1 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 pb-px text-center text-xs'
+        >
           {$cart.items.length}
         </div>
       )}

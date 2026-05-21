@@ -49,7 +49,7 @@ export default function Purchases() {
               </div>
               <footer className='flex items-center justify-between p-4'>
                 <p>Total del pedido: </p>
-                <span className='text-lg font-bold text-violet-400 lg:text-2xl '>
+                <span className='text-lg font-bold text-violet-400 lg:text-2xl'>
                   ${total} {items[0].currency}
                 </span>
               </footer>

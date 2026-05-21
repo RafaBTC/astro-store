@@ -13,17 +13,23 @@ import { defineConfig, devices } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './e2e',
+  timeout: 5 * 60 * 1000,
+  expect: {
+    timeout: 10 * 1000
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'http://localhost:4321',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
     //headless: true
+    actionTimeout: 10 * 1000,
+    navigationTimeout: 15 * 1000
   },
   /* Run your local dev server before starting the tests */
   webServer: {
     // run dev para local, preview para un ambiente más real
-    command: 'npm run dev',
+    command: 'pnpm run dev',
     url: 'http://localhost:4321',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI

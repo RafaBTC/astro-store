@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { logout } from '../lib/stores/authStores'
+import { logout } from '../lib/stores/authStore'
 
 export default function LogoutButton() {
   const [loading, setLoading] = useState(false)
