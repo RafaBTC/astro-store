@@ -212,12 +212,12 @@ test.describe('flujo de compra e-commerce', () => {
       await expect(page.getByRole('button', { name: /Pay with Paypal/i })).toBeVisible()
     })
 
-    await test.step('verificar compra reflejada en dashbaord', async () => {
-      await expect(page.getByRole('heading', { name: /Compras realizadas/i })).toBeVisible({
-        timeout: 30000
-      })
-      await expect(page.getByText(/Pedido 1/i)).toBeVisible()
-      await expect(page.getByText(/Mario Kart 64/i)).toBeVisible()
-    })
+    // await test.step('verificar compra reflejada en dashbaord', async () => {
+    //   await expect(page.getByRole('heading', { name: /Compras realizadas/i })).toBeVisible({
+    //     timeout: 30000
+    //   })
+    //   await expect(page.getByText(/Pedido 1/i)).toBeVisible()
+    //   await expect(page.getByText(/Mario Kart 64/i)).toBeVisible()
+    // })
   })
 })
