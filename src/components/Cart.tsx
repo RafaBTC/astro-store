@@ -15,22 +15,22 @@ export default function Cart() {
 
   return (
     <div
-      className={`fixed rounded-2xl bg-slate-600 ${$isCartOpen ? 'block' : 'hidden'} top-20 right-8 z-999 flex h-80 max-h-80 w-72 flex-col justify-between overflow-y-auto p-4 transition-all duration-300 lg:w-100`}
+      className={`fixed rounded-2xl bg-slate-600 ${$isCartOpen ? 'block' : 'hidden'} top-20 right-8 z-999 flex h-80 max-h-80 w-72 scrollbar-thumb-neutral-400 scrollbar-track-slate-600 flex-col justify-between overflow-y-auto p-4 transition-all duration-300 lg:w-100`}
     >
       {$cartStore.items.length ? (
         <ul className='space-y-4'>
           {$cartStore.items.map(({ id, image, name, price, currency, quantity }) => (
             <li key={id} className='flex justify-between gap-4'>
-              <div className='flex gap-4'>
+              <div className='flex w-full gap-4'>
                 <img
                   src={image}
                   alt={`Cover del juego ${name}`}
                   className='mx-auto h-auto w-16 object-contain'
                 />
 
-                <div>
-                  <p className='text-sm font-bold lg:text-lg'>{name}</p>
-                  <div className='flex flex-col justify-between text-xs lg:flex-row lg:text-base'>
+                <div className='flex w-full flex-col'>
+                  <p className='text-sm leading-snug font-bold lg:text-lg'>{name}</p>
+                  <div className='flex flex-col justify-center text-xs lg:flex-row lg:items-center lg:justify-between lg:text-base'>
                     <p>Quantity: {quantity}</p>
                     <span className='text-xs font-medium lg:text-sm'>
                       ${price} {currency}
