@@ -1,12 +1,15 @@
-export interface CartItem {
+export interface Product {
   id: string
   name: string
   price: number
   currency: string
   image: string
   description: string
+}
+
+export type CartItem = Product & {
   quantity: number
-  loading: 'lazy' | 'eager' | undefined
+  loading?: 'lazy' | 'eager'
 }
 
 export interface Cart {

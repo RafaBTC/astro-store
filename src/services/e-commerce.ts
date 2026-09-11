@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
 
-import type { CartItem } from '../types/Cart'
+import type { Product } from '../types/Cart'
 
-export async function getProducts(): Promise<CartItem[]> {
+export async function getProducts(): Promise<Product[]> {
   try {
     const res = await fetch('/api/e-commerce/products', {
       method: 'GET',
