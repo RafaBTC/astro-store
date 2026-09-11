@@ -17,5 +17,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  adapter: node()
+  adapter: node({ mode: 'standalone' })
 })
