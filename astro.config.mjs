@@ -6,9 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 import icon from 'astro-icon'
 
-import vercel from '@astrojs/vercel'
-
-//import node from '@astrojs/node'
+import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,5 +17,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  adapter: vercel()
+  adapter: node()
 })

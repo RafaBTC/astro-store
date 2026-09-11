@@ -7,20 +7,24 @@ El objetivo de este proyecto es **practicar las diferentes formas de iniciar ses
 - Configurar el ESLint con un estandar o airbnb de base
 
 ### Pasos para instalar ESLint:
+
 1. Instalar los siguientes paquetes:
+
 ```
 npm install --save-dev eslint prettier eslint-plugin-astro eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier-plugin-astro prettier-plugin-tailwindcss eslint-config-prettier
 ```
 
-2. Crear archivo 
+2. Crear archivo
+
 ```
 eslint.config.ts
 ```
 
 3. Empezar a configurar el archivo
-*Después de como una hora, he logrado hacer funcionar el ESLINT, se debe de hacer referencia a las reglas que aquí se explican, ya que los plugins no dan nada más:
-https://eslint.org/docs/latest/rules
-*
+   \*Después de como una hora, he logrado hacer funcionar el ESLINT, se debe de hacer referencia a las reglas que aquí se explican, ya que los plugins no dan nada más:
+   https://eslint.org/docs/latest/rules
+
+-
 
 4. Seguir customizando el archivo hasta hacerlo lo más amigable y como lo queremos posible
 
@@ -29,18 +33,21 @@ https://eslint.org/docs/latest/rules
 ```
 npm run lint
 ```
+
 Para ver los errores de ESLINT
 
-6. Ejecutar 
+6. Ejecutar
 
 ```
 npm run lint: fix
 ```
+
 Con --fix se corregiran todos los problemas de formato y se conseguirá el estandar siempre
 
 (Lo mismo para Prettier)
 
 ## Checklist de la practica
+
 - Crear un carrito con nanostores ✅
 - Poder añadir productos ✅
 - Poder eliminar productos ✅
@@ -55,21 +62,23 @@ Con --fix se corregiran todos los problemas de formato y se conseguirá el estan
 - Documentar la arq del proyecto ( La solución es definir capas con responsabilidades únicas.)
 - **DOCUMENTAR LOS APRENDIZAJES**
 
+---
 
 ---
----
+
 --
 
 ## Arquitectura del proyecto
+
 Después de entender el framework de Astro, creo que es más sencillo entender la arquitectura de desarrollo para el proyecto del sitio web con e-commerce e inicio de sesión:
 
 (extraído de claude)
 **PROMT:**
 
->vale, ya he implementando paypal sdk v6 en astro y ya está funcionando, podemos pasar al punto numero 2 de mi mensaje? es decir:
+> vale, ya he implementando paypal sdk v6 en astro y ya está funcionando, podemos pasar al punto numero 2 de mi mensaje? es decir:
 
->>Cuál es la mejor manera de trabajar con endpoints? esto es más un tema de arquitectura, ya que... tengo mis API endpoints dentro de pages, todo ok, pero la duda es en donde crear las funciones que hacen fetch a las rutas, ya que lo hago desde los archivos de los nanostores, otros en archivos tipo servicios, otros en archivos tipo lib... ayúdame a estandarizar esto [explícame esto hasta que yo te diga y terminemos primero lo de paypal] .
->>Y en general, dime cual es la mejor arquitectura para mi proyecto de Astro, con react, componentes interactivos o reactivos de react, llamadas a apis (backend externo), notificación con toast y modals, etc.
+> > Cuál es la mejor manera de trabajar con endpoints? esto es más un tema de arquitectura, ya que... tengo mis API endpoints dentro de pages, todo ok, pero la duda es en donde crear las funciones que hacen fetch a las rutas, ya que lo hago desde los archivos de los nanostores, otros en archivos tipo servicios, otros en archivos tipo lib... ayúdame a estandarizar esto [explícame esto hasta que yo te diga y terminemos primero lo de paypal] .
+> > Y en general, dime cual es la mejor arquitectura para mi proyecto de Astro, con react, componentes interactivos o reactivos de react, llamadas a apis (backend externo), notificación con toast y modals, etc.
 
 Buena pregunta, y es algo que vale la pena resolver bien desde el principio porque si no, el proyecto se vuelve un caos de imports cruzados.
 
@@ -81,7 +90,7 @@ Primero déjame ver qué recomienda Astro oficialmente sobre organización de pr
 
 ```
 stores/cart.ts      → tiene fetch a /api/cart
-lib/paypal.ts       → tiene fetch a /api/paypal  
+lib/paypal.ts       → tiene fetch a /api/paypal
 services/auth.ts    → tiene fetch a /api/auth
 components/X.tsx    → a veces también hace fetch directo
 ```
@@ -150,7 +159,7 @@ const BASE = import.meta.env.BACKEND_URL
 export const cartService = {
   async getCart(token: string): Promise<CartState> {
     const res = await fetch(`${BASE}/cart`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     })
     if (!res.ok) throw new Error('Error fetching cart')
     return res.json()
@@ -161,9 +170,9 @@ export const cartService = {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(item),
+      body: JSON.stringify(item)
     })
     if (!res.ok) throw new Error('Error adding item')
     return res.json()
@@ -172,11 +181,11 @@ export const cartService = {
   async removeItem(token: string, itemId: string): Promise<CartState> {
     const res = await fetch(`${BASE}/cart/items/${itemId}`, {
       method: 'DELETE',
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     })
     if (!res.ok) throw new Error('Error removing item')
     return res.json()
-  },
+  }
 }
 ```
 
@@ -200,7 +209,7 @@ export async function addToCart(item: Omit<CartItem, 'quantity'>) {
   const res = await fetch('/api/cart/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item),
+    body: JSON.stringify(item)
   })
   if (!res.ok) throw new Error('Error adding to cart')
   const updated: CartState = await res.json()
@@ -291,8 +300,7 @@ Sin fetch, sin estado, sin React. Solo funciones puras: formatters, validadores,
 export const formatPrice = (amount: number, currency = 'USD') =>
   new Intl.NumberFormat('es-MX', { style: 'currency', currency }).format(amount)
 
-export const formatDate = (date: string) =>
-  new Intl.DateTimeFormat('es-MX').format(new Date(date))
+export const formatDate = (date: string) => new Intl.DateTimeFormat('es-MX').format(new Date(date))
 ```
 
 ---
@@ -363,31 +371,30 @@ src/
 
 Cada capa tiene una responsabilidad única y nunca salta niveles. Si mañana cambias tu backend externo, solo tocas `src/services/`. Si cambias la UI, solo tocas `src/components/`. Si agregas lógica de toast o loading, solo tocas `src/hooks/`.
 
-
-
 # TESTING
+
 Existen 3 tipos de test (pensar en ellos como piramide):
 
-1. _**E2E (end to end) Test**_ (pocos, lentos, simulan al usuario real)
-2. _**Component Test**_ (medios, prueban componentes de react u otra librería)
-3. _**Unit test**_ (muchos, rápidos, prueban funciones puras (lib, services, etc))
-      
+1.  _**E2E (end to end) Test**_ (pocos, lentos, simulan al usuario real)
+2.  _**Component Test**_ (medios, prueban componentes de react u otra librería)
+3.  _**Unit test**_ (muchos, rápidos, prueban funciones puras (lib, services, etc))
+    / \
      / \
-    /   \
-   /  1  \
-  /   2   \
- /    3    \
-/___________\
+    / 1 \
+     / 2 \
+     / 3 \
+    /\***\*\_\_\_\*\***\
 
-
-| Tipo      | Qué prueba                           | Herramientas | Velocidad   |
-| --------- |:------------------------------------:|:------------:|:-----------:|
-| Unit      | Funciones puras (lib, services, etc) | Vitest       | Instantáneo |
-| Component | Componentes React en aislamiento     | Vitest + RTL | Rápido      |
-| E2E       | Flujo completo en el navegador real  | Playwright   | Lento       |
+| Tipo      |              Qué prueba              | Herramientas |  Velocidad  |
+| --------- | :----------------------------------: | :----------: | :---------: |
+| Unit      | Funciones puras (lib, services, etc) |    Vitest    | Instantáneo |
+| Component |   Componentes React en aislamiento   | Vitest + RTL |   Rápido    |
+| E2E       | Flujo completo en el navegador real  |  Playwright  |    Lento    |
 
 ## Setup para el proyecto
+
 1. **Instalar dependencias**
+
 ```ts
 # Unit + components tests
 npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event happy-dom
@@ -398,6 +405,7 @@ npx playwright install chromium
 ```
 
 2. **Configurar Vitest**
+
 ```ts
 // vitest.config.ts
 /// <reference types="vitest/config" />
@@ -413,18 +421,19 @@ export default getViteConfig({
   }
 })
 
-
 // src/test/setup.ts
-import '@testing-library/jest-dom'  // agrega matchers como toBeInTheDocument
+import '@testing-library/jest-dom' // agrega matchers como toBeInTheDocument
 ```
 
 3. **Configurar Playwright**
-Se recomienda ejecutar
+   Se recomienda ejecutar
+
 ```ts
 npm init playwright@latest
 ```
 
 Y configurar el archivo
+
 ```ts
 // playwright.config.ts
 import { defineConfig } from '@playwright/test'
@@ -433,18 +442,20 @@ export default defineConfig({
   testDir: './e2e',
   baseURL: 'http://localhost:4321',
   use: {
-    headless: true,
+    headless: true
   },
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:4321',
-    reuseExistingServer: !process.env.CI,
-  },
+    reuseExistingServer: !process.env.CI
+  }
 })
 ```
+
 Lo estandar es tener en la raíz del proyecto la carpeta /e2e y el archivo playwright.config.ts
 
 4. **Crear los scripts de test en el package.json**
+
 ```ts
 {
   "scripts": {
@@ -459,7 +470,8 @@ Lo estandar es tener en la raíz del proyecto la carpeta /e2e y el archivo playw
 
 5. **Proceder a crear los tests para funciones, components y e2e, mantenerlo de la siguiente manera (estructura de archivos y carpetas)**
 
-* Lo ideal es tener los tests por el nombre del archivo al que se le hace test, por ejemplo:
+- Lo ideal es tener los tests por el nombre del archivo al que se le hace test, por ejemplo:
+
 ```
 components/
   ProductCard/
@@ -473,13 +485,10 @@ e2e/
   login.spec.ts
 ```
 
-
-
 PREGUNTAR EL MANEJO CORRECTO DE ERRORES Y CÓMO APLICAR DRY EN LOS NANOSTORES AL LLAMAR A LAS API
 
 Y si tengo tiempo, en el futuro...
+
 - Implementar bases de datos
 - Hacer las APIs Routes un backend seguro
 - conectar bases de datos con API Routes
-
-

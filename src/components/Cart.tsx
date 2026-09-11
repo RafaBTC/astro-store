@@ -8,7 +8,7 @@ export default function Cart() {
   const $cartStore = useStore(cartStore)
 
   useEffect(() => {
-    if ($cartStore.items.length === 0 || window.location.pathname !== '/') {
+    if ($cartStore.items.length === 0 && window.location.pathname !== '/') {
       isCartOpen.set(false)
     }
   }, [$cartStore.items.length])

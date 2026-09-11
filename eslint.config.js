@@ -6,8 +6,8 @@ import importPlugin from 'eslint-plugin-import'
 import prettierPlugin from 'eslint-plugin-prettier'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
-//import globals from 'globals'
 import tsEslint from 'typescript-eslint'
+//import globals from 'globals'
 
 // ─── Reglas compartidas de lógica (NO formato — eso lo maneja Prettier) ───────
 const sharedLogicRules = {
